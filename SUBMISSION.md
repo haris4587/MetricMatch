@@ -5,6 +5,7 @@
 **Website:** https://metricmatch-benchmarks.itzanza2.chatgpt.site/  
 **Source:** https://github.com/haris4587/MetricMatch  
 **Studionet contract:** https://explorer-studio.genlayer.com/address/0xA5BD9189755004Da01b1A946C1E33f0f88a98203  
+**Logo:** https://github.com/haris4587/MetricMatch/raw/refs/heads/main/assets/metricmatch-logo.png  
 **Live test and transactions:** https://github.com/haris4587/MetricMatch/blob/main/EVIDENCE.md
 
 MetricMatch lets a developer publish a software benchmark claim with the precise workload, environment, metric, original source, and challenge deadline. Another address can submit a public counterexample and observed number. A GenLayer Intelligent Contract fetches the evidence and asks validators whether the tests are genuinely comparable. It then applies a deterministic higher-or-lower threshold. Ambiguous or unavailable evidence remains inconclusive rather than producing a false refutation. Anyone can inspect finalized claims in the public app.
