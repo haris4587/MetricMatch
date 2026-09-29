@@ -20,13 +20,13 @@ npm test
 npm run dev
 ```
 
-Deploy `contracts/metric_match.py` in [GenLayer Studio](https://studio.genlayer.com/) on Studionet with its built-in account. Put the final contract address in `src/deployment.json`, rebuild, and publish. The app reads `LATEST_FINAL` state and uses `genlayer-js` for signed browser-wallet writes, fee estimation, and finalization. Studio’s built-in wallet is used in Studio for the live test; a visitor needs a compatible browser wallet to write from the website. The address field lets an operator inspect another deployment without rebuilding.
+The contract is deployed in [GenLayer Studio](https://studio.genlayer.com/) on Studionet; its address is in `src/deployment.json`. The [public app](https://metricmatch-benchmarks.itzanza2.chatgpt.site/) reads `LATEST_FINAL` state and uses `genlayer-js` for signed browser-wallet writes, fee estimation, and finalization. Studio’s built-in accounts were used for the live test; a visitor needs a compatible browser wallet to write from the website. The address field lets an operator inspect another deployment without rebuilding.
 
 ## Source and proof
 
 - Contract: `contracts/metric_match.py`
 - Client: `src/genlayer.ts` and `src/main.tsx`
-- Deployment and transaction IDs: add verified identifiers to `EVIDENCE.md` after execution.
+- Deployment, transaction IDs, and the live test's limitations: [`EVIDENCE.md`](EVIDENCE.md).
 - Network: Studionet chain 61999, `https://studio.genlayer.com/api`.
 
 Security constraints: inputs are bounded, source URLs must use HTTPS, claim ownership blocks self-challenges, resolution is single-challenge per claim, and unknown claim IDs fail. Source sites can change after a decision; the on-chain verdict records the outcome rather than an immutable snapshot of page bytes. This version does not transfer or escrow funds.
