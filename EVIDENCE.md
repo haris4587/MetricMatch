@@ -21,7 +21,7 @@ The initial contract used `gl.nondet.web.get(...)` correctly but accessed `respo
 - Deployment transaction: `0xd1fe755dfc20d205f44bb813d26c8953e66958f8e67a844daea8d67519e98da2` — FINALIZED in Studio.
 - Deployment account (Studio built-in): `0x406f1E831b7141C6283aee1905bb785a53Ec7E1C`.
 
-Public app: [metricmatch-benchmarks.itzanza2.chatgpt.site](https://metricmatch-benchmarks.itzanza2.chatgpt.site/). It reads finalized contract state, including both claims below. The deployment and transactions were executed using Studio's built-in accounts and test GEN.
+The [public app](https://metricmatch-benchmarks.itzanza2.chatgpt.site/) now reads the corrected deployment above. The two historical claims below remain on the initial contract. These transactions used Studio's built-in accounts and test GEN.
 
 ## Live workflow
 
