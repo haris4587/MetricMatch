@@ -73,7 +73,7 @@ class MetricMatch(gl.Contract):
             try:
                 original = gl.nondet.web.get(c["evidence_url"])
                 alternative = gl.nondet.web.get(ch["evidence_url"])
-                if original.status_code != 200 or alternative.status_code != 200:
+                if not original.body or not alternative.body:
                     return "INCONCLUSIVE"
                 a = original.body.decode("utf-8", errors="replace")[:16000]
                 b = alternative.body.decode("utf-8", errors="replace")[:16000]
