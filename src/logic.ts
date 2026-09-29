@@ -1,0 +1,6 @@
+export type Claim = {id:number; owner:string; title:string; product:string; metric:string; claimed_value:number; unit:string; lower_is_better:boolean; conditions:string; evidence_url:string; deadline:number; status:string; verdict:string; attempts:number};
+export type Challenge = {challenger:string; evidence_url:string; observed_value:number; submitted_at:number};
+export function parseClaim(raw:unknown):Claim { const value = typeof raw === 'string' ? JSON.parse(raw) : raw; if (!value || typeof value.id !== 'number' || typeof value.status !== 'string') throw new Error('Invalid contract response'); return value as Claim; }
+export function parseChallenge(raw:unknown):Challenge|null { if (!raw) return null; const value = typeof raw === 'string' ? JSON.parse(raw) : raw; return value && value.challenger ? value as Challenge : null; }
+export function numericInput(value:string):number { const n = Number(value); if (!Number.isSafeInteger(n) || n <= 0 || n > 4294967295) throw new Error('Enter a positive whole number up to 4,294,967,295'); return n; }
+export function compare(claim:Claim, challenge:Challenge):boolean { return claim.lower_is_better ? challenge.observed_value > claim.claimed_value : challenge.observed_value < claim.claimed_value; }
