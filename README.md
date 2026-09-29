@@ -20,7 +20,7 @@ npm test
 npm run dev
 ```
 
-The contract is deployed in [GenLayer Studio](https://studio.genlayer.com/) on Studionet; its address is in `src/deployment.json`. The [public app](https://metricmatch-benchmarks.itzanza2.chatgpt.site/) reads `LATEST_FINAL` state and uses `genlayer-js` for signed browser-wallet writes, fee estimation, and finalization. Studio’s built-in accounts were used for the live test; a visitor needs a compatible browser wallet to write from the website. The address field lets an operator inspect another deployment without rebuilding.
+The corrected contract is deployed in [GenLayer Studio](https://studio.genlayer.com/) on Studionet; its address is in `src/deployment.json`. The [public app](https://metricmatch-benchmarks.itzanza2.chatgpt.site/) reads `LATEST_FINAL` state and uses `genlayer-js` for signed browser-wallet writes, fee estimation, and finalization. Studio’s built-in accounts were used for the live test; a visitor needs a compatible browser wallet to write from the website. The address field lets an operator inspect another deployment without rebuilding.
 
 ## Source and proof
 
