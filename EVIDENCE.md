@@ -32,7 +32,7 @@ Every deployment, deposit, evaluation, withdrawal and child transfer hash is rec
 
 ## Publication and submission status
 
-The existing public website remains the earlier no-stakes release until v0.2 is published. The updated source targets the stake-enabled contract above. Portal submission is not yet complete: the Portal requires the account owner's browser-wallet sign-in and acceptance of its terms. No listing approval or mainnet deployment is claimed.
+The public website v0.2 was published September 30, 2026 and targets the stake-enabled contract above. [Publication record](evidence/site-release.json) identifies the pushed Site source commit and successful deployment. Portal submission is not yet complete: the Portal requires the account owner's browser-wallet sign-in and acceptance of its terms. No listing approval or mainnet deployment is claimed.
 
 ---
 

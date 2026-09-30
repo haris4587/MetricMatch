@@ -26,7 +26,7 @@ The website uses `genlayer-js` 1.1.8, wallet-backed writes including payable val
 
 ## Evidence and release status
 
-- [Public website](https://metricmatch-benchmarks.itzanza2.chatgpt.site/) — previous release until v0.2 publication completes.
+- [Public website](https://metricmatch-benchmarks.itzanza2.chatgpt.site/) — v0.2 published September 30, 2026; targets the stake-enabled contract.
 - [Live proof](EVIDENCE.md) — finalized funded resolution and refunds on the stake-enabled contract, with zero outstanding funds.
 - [Submission package](SUBMISSION.md) — ready for the owner to submit through the Portal.
 - Studionet chain 61999: `https://studio.genlayer.com/api`.
