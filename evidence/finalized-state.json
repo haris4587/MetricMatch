@@ -1,0 +1,83 @@
+{
+  "network": "studionet",
+  "address": "0x3F251a2330c21312093cf76e8AC10274b40D155D",
+  "checked_at": "2026-09-30T05:19:35.251Z",
+  "state": "LATEST_FINAL",
+  "claims": [
+    {
+      "attempts": 1,
+      "challenger_credit_wei": "2000000000000000000",
+      "claimed_value": 40,
+      "conditions": "4 vCPU, 8 GB RAM, Linux x86_64; build the included 100-file sample project from a clean cache; median wall-clock time across five runs; default settings, offline dependencies, no background jobs. Synthetic demonstration fixture.",
+      "created_at": 1790711821,
+      "deadline": 1791316621,
+      "evidence_url": "https://metricmatch-benchmarks.itzanza2.chatgpt.site/evidence/reference.html",
+      "history": [
+        {
+          "at": 1790711964,
+          "attempt": 1,
+          "verdict": "COMPARABLE"
+        }
+      ],
+      "id": 0,
+      "lower_is_better": true,
+      "metric": "Median wall-clock build time",
+      "owner": "0x9Ce3D7D516c3cdE9210EDdc7c5E197F8f8Ad71Ff",
+      "owner_credit_wei": "0",
+      "product": "MetricMatch Example CLI v1.0",
+      "resolution_deadline": 1791403021,
+      "settled": true,
+      "stake_wei": "1000000000000000000",
+      "status": "REFUTED",
+      "title": "Synthetic CLI build time — matched stake pilot",
+      "unit": "seconds",
+      "verdict": "COMPARABLE"
+    },
+    {
+      "attempts": 3,
+      "challenger_credit_wei": "1000000000000000000",
+      "claimed_value": 40,
+      "conditions": "4 vCPU, 8 GB RAM, Linux x86_64; build the included 100-file sample project from a clean cache; median wall-clock time across five runs; default settings, offline dependencies, no background jobs. Synthetic demonstration fixture.",
+      "created_at": 1790712688,
+      "deadline": 1791317488,
+      "evidence_url": "https://metricmatch-benchmarks.itzanza2.chatgpt.site/evidence/reference.html",
+      "history": [
+        {
+          "at": 1790712815,
+          "attempt": 1,
+          "verdict": "INCONCLUSIVE"
+        },
+        {
+          "at": 1790712898,
+          "attempt": 2,
+          "verdict": "INCONCLUSIVE"
+        },
+        {
+          "at": 1790712987,
+          "attempt": 3,
+          "verdict": "INCONCLUSIVE"
+        }
+      ],
+      "id": 1,
+      "lower_is_better": true,
+      "metric": "Median wall-clock build time",
+      "owner": "0x9Ce3D7D516c3cdE9210EDdc7c5E197F8f8Ad71Ff",
+      "owner_credit_wei": "1000000000000000000",
+      "product": "MetricMatch Example CLI v1.0",
+      "resolution_deadline": 1791403888,
+      "settled": true,
+      "stake_wei": "1000000000000000000",
+      "status": "INCONCLUSIVE",
+      "title": "Synthetic refund pilot — unavailable counterevidence",
+      "unit": "seconds",
+      "verdict": "INCONCLUSIVE"
+    }
+  ],
+  "accounting": {
+    "balance_wei": "0",
+    "credit_wei": "0",
+    "deposited_wei": "4000000000000000000",
+    "locked_wei": "0",
+    "withdrawn_wei": "4000000000000000000"
+  }
+}

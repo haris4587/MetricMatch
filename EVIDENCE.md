@@ -1,8 +1,46 @@
-# Live evidence
+# MetricMatch v0.2 live evidence
+
+Network: GenLayer Studionet, chain ID 61999. All balances and transfers below are **simulated GEN**, not mainnet funds. Both evidence pages are explicitly synthetic fixtures, not real independent software benchmarks.
+
+## Stake-enabled deployment
+
+- Contract: [0x3F251a2330c21312093cf76e8AC10274b40D155D](https://explorer-studio.genlayer.com/address/0x3F251a2330c21312093cf76e8AC10274b40D155D)
+- Deployment: [0x70d6d081a7a7e365b60ea439761e0958e5c6c13f6ea41289d040f3a8d8b14272](https://explorer-studio.genlayer.com/tx/0x70d6d081a7a7e365b60ea439761e0958e5c6c13f6ea41289d040f3a8d8b14272), FINALIZED.
+- The release contract source was recovered byte-for-byte from this deployment transaction. Its web API checks `response.status`, as declared in the Python runtime, and rejects non-200 responses before interpreting content.
+- Claimant Studio account: `0x9Ce3D7D516c3cdE9210EDdc7c5E197F8f8Ad71Ff`.
+- Challenger Studio account: `0xc45252EE825293C2566541c6C80D56B6122b17A3`.
+
+## Finalized live tests
+
+| Claim | Result | Settlement | Finalized transfer |
+| --- | --- | --- | --- |
+| #0: 40-second claim, 48-second challenge | COMPARABLE, REFUTED, one attempt | Two matched one-GEN deposits awarded to challenger | [2 GEN to challenger](https://explorer-studio.genlayer.com/tx/0x277d56a283795d287c80c24815ffd62e07cf1b2a84b71b631e466963df736740) |
+| #1: unavailable counterevidence | INCONCLUSIVE after three attempts | Each party received its one-GEN deposit back | [1 GEN to challenger](https://explorer-studio.genlayer.com/tx/0x1b4c4b4f1a3742345715ce1d900a867c89dbb6ea4880d392cc65f8f166111dcc), [1 GEN to claimant](https://explorer-studio.genlayer.com/tx/0x98ff7801eb49a28233d12223ff184c9fd53131156b1aa1582767578344d51dff) |
+
+Claim #0 consensus evaluation: [0x70992a2986962f1a63dd82371d93d3aca7fa8205cd750ac0f634e060fec68bbb](https://explorer-studio.genlayer.com/tx/0x70992a2986962f1a63dd82371d93d3aca7fa8205cd750ac0f634e060fec68bbb), NORMAL full-consensus mode, FINALIZED.
+
+Claim #1 final evaluation: [0xd91110ad609e2cba0b2c2d104e6c1827af391d303b3bb6e84bbf3a14c0eb145f](https://explorer-studio.genlayer.com/tx/0xd91110ad609e2cba0b2c2d104e6c1827af391d303b3bb6e84bbf3a14c0eb145f), NORMAL full-consensus mode, FINALIZED.
+
+Every deployment, deposit, evaluation, withdrawal and child transfer hash is recorded in [transactions.json](evidence/transactions.json). Finalized SDK reads on September 30 are recorded in [finalized-state.json](evidence/finalized-state.json): 4 GEN deposited, 4 GEN withdrawn, 0 locked, 0 credit and 0 balance. These records prove the funded workflow, consensus outcome, and simulated transfers; they do not certify a real benchmark result or mainnet escrow safety.
+
+## Repository checks
+
+- `npm test`: frontend parsing, integer bounds, metric directions, exact GEN conversion.
+- `npm run test:contract`: 18 Python tests execute the actual release contract with a strict mocked GenVM boundary. They cover matched stakes, both metric directions, withdrawal, single settlement, HTTP errors, API mismatch, validator disagreement, retry refunds and deadline refunds. These are unit tests, not a VM integration test.
+- `npm run typecheck` and `npm run build`: pass.
+- `node scripts/verify-live.mjs`: verifies finalized claims and zero outstanding accounting; optional `METRICMATCH_CURL_TRANSPORT=1` uses curl in proxy-based environments.
+
+## Publication and submission status
+
+The existing public website remains the earlier no-stakes release until v0.2 is published. The updated source targets the stake-enabled contract above. Portal submission is not yet complete: the Portal requires the account owner's browser-wallet sign-in and acceptance of its terms. No listing approval or mainnet deployment is claimed.
+
+---
+
+# Historical pre-stakes evidence
 
 Network: GenLayer Studionet (chain ID 61999)
 
-## Current deployment and resolved live run
+## Previous deployment and resolved live run
 
 - Contract: [`0xA5BD9189755004Da01b1A946C1E33f0f88a98203`](https://explorer-studio.genlayer.com/address/0xA5BD9189755004Da01b1A946C1E33f0f88a98203)
 - Deployment transaction: `0x2afe9d99202b2551c5ceae72c1b1ffcb0c8be6a5a2c467b9603fcbed27223fe8` — FINALIZED.
@@ -21,7 +59,7 @@ The initial contract used `gl.nondet.web.get(...)` correctly but accessed `respo
 - Deployment transaction: `0xd1fe755dfc20d205f44bb813d26c8953e66958f8e67a844daea8d67519e98da2` — FINALIZED in Studio.
 - Deployment account (Studio built-in): `0x406f1E831b7141C6283aee1905bb785a53Ec7E1C`.
 
-The [public app](https://metricmatch-benchmarks.itzanza2.chatgpt.site/) now reads the corrected deployment above. The two historical claims below remain on the initial contract. These transactions used Studio's built-in accounts and test GEN.
+The [public app](https://metricmatch-benchmarks.itzanza2.chatgpt.site/) previously read the corrected deployment above. The two historical claims below remain on the initial contract. These transactions used Studio's built-in accounts and test GEN.
 
 ## Live workflow
 

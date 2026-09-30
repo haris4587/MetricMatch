@@ -20,3 +20,11 @@ test('the two score directions produce opposite refutation outcomes',()=>{
   assert.equal(compare(base,observed),true);
   assert.equal(compare({...base,lower_is_better:false},observed),false);
 });
+
+test('GEN conversion preserves exact wei and enforces stake cap',async()=>{
+  const {stakeInput,formatGen}=await import('../src/logic.ts');
+  assert.equal(stakeInput('0.000000000000000001'),1n);
+  assert.equal(stakeInput('1.5'),1500000000000000000n);
+  assert.equal(formatGen('1500000000000000000'),'1.5');
+  for(const bad of ['-1','1e3','1001','0.0000000000000000001']) assert.throws(()=>stakeInput(bad));
+});
