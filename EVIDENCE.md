@@ -11,6 +11,8 @@ Contract: `0x58E44E52fABfbFcF83759F8eB8296B81cc517E11`.
 
 Reproduce read-only checks: `METRICMATCH_CURL_TRANSPORT=1 node scripts/read-live.mjs`, then `node scripts/verify-live.mjs`. [Finalized state](evidence/v03-finalized-state.json) contains full on-chain snapshots and receipts. [Transactions](evidence/v03-transactions.json) lists exact finalized transaction hashes. Sources use GitHub commit-pinned fixture URLs, additionally authenticated by the contract.
 
+[Studio proof screenshot](evidence/v03-studio.jpg) · [Published release record](evidence/v03-site-release.json). The tested contract, frontend and test source hashes match the pushed GitHub version and published Site source.
+
 ## Adversarial contract tests
 
 `npm run test:contract` passes 38 tests executing the release Python with mocked GenVM boundaries. Tests demonstrate legitimate settlement/withdrawal after missing, changed, inconclusive, non-comparable and repeatedly invalid submissions; successful subsequent refutation after a comparable but non-refuting attempt; original page removal/mutation independence; candidate mutation between validators reverting without reservation; exact fingerprints and untruncated text; immutable receipt hashes/history; deadline recovery; self-challenge/stake mismatch rejection; duplicate settlement/withdrawal rejection; multiple claims; and exact escrow accounting. Four frontend tests, TypeScript checks and the production build pass. Mock tests are distinguished from the actual consensus proof above.
