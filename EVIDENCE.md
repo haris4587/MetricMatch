@@ -1,3 +1,24 @@
+# MetricMatch v0.3 steward security evidence
+
+Verified October 9, 2026 on Studionet using three built-in accounts and Normal (Full Consensus), with Simulation Mode off. GEN balances remain simulated.
+
+Contract: `0x58E44E52fABfbFcF83759F8eB8296B81cc517E11`.
+
+1. Owner `0x379aa6A94a159190652ec1cFf43B299F0AbCcbB8` committed the authenticated 777-byte original page, 40 seconds, lower-is-better, with 1 GEN. The stored original snapshot and SHA-256 match the exact page bytes.
+2. Attacker `0x1f8F31Cd3eD7e1911E045409AbC034227634A680` deposited 1 GEN with an inaccessible URL. Immutable receipt #0 records SOURCE_UNAVAILABLE / INCONCLUSIVE / REFUNDED and 1 GEN credit. This did not consume an exclusive challenge slot.
+3. After that transaction finalized, distinct legitimate challenger `0xc4763A67FE91382401Fda530B29398D47F643585` submitted the authenticated 778-byte 48-second page with 1 GEN against the SAME claim #0. Receipt #1 records VERIFIED / COMPARABLE / REFUTED and 2 GEN credit; it links to receipt #0. Claim #0 is finalized REFUTED with two recorded attempts. Thus a legitimate challenge and settlement succeeded after invalid evidence.
+4. Finalized accounting: 3 GEN deposited, 0 locked, 3 withdrawable, 0 withdrawn. No v0.3 transfer is claimed: automatic approval review blocked the withdrawal click, treating the simulated GEN transfer as consequential. Both credits remain available to their built-in accounts.
+
+Reproduce read-only checks: `METRICMATCH_CURL_TRANSPORT=1 node scripts/read-live.mjs`, then `node scripts/verify-live.mjs`. [Finalized state](evidence/v03-finalized-state.json) contains full on-chain snapshots and receipts. [Transactions](evidence/v03-transactions.json) lists exact finalized transaction hashes. Sources use GitHub commit-pinned fixture URLs, additionally authenticated by the contract.
+
+## Adversarial contract tests
+
+`npm run test:contract` passes 38 tests executing the release Python with mocked GenVM boundaries. Tests demonstrate legitimate settlement/withdrawal after missing, changed, inconclusive, non-comparable and repeatedly invalid submissions; successful subsequent refutation after a comparable but non-refuting attempt; original page removal/mutation independence; candidate mutation between validators reverting without reservation; exact fingerprints and untruncated text; immutable receipt hashes/history; deadline recovery; self-challenge/stake mismatch rejection; duplicate settlement/withdrawal rejection; multiple claims; and exact escrow accounting. Four frontend tests, TypeScript checks and the production build pass. Mock tests are distinguished from the actual consensus proof above.
+
+## Historical v0.2 evidence
+
+The following proof belongs to the previous contract and demonstrates its historical simulated transfers. Its exclusive-slot API is superseded by v0.3; do not deploy its old contract source for the steward fix.
+
 # MetricMatch v0.2 live evidence
 
 Network: GenLayer Studionet, chain ID 61999. All balances and transfers below are **simulated GEN**, not mainnet funds. Both evidence pages are explicitly synthetic fixtures, not real independent software benchmarks.

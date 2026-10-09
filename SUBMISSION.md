@@ -1,37 +1,19 @@
-# MetricMatch — GenLayer Project Explorer submission
+# MetricMatch v0.3 project update
 
-Application date: 09/30/2026. Contribution type: Builder → Projects → Project.
+Existing submission is in Needed Action according to the owner. This revision addresses the steward security request. Portal update has not been sent: the available browser session is signed out and the user instructed not to connect a wallet.
 
-**Name:** MetricMatch  
-**Suggested primary tag:** Developer Tools (use the closest available Portal category).  
-**Topics:** Benchmarking; AI consensus.  
-**One-liner:** Challenge software benchmarks on comparable evidence, with matched stakes settled by GenLayer.  
-**Website:** https://metricmatch-benchmarks.itzanza2.chatgpt.site/  
-**Repository:** https://github.com/haris4587/MetricMatch  
-**Contract:** https://explorer-studio.genlayer.com/address/0x3F251a2330c21312093cf76e8AC10274b40D155D  
-**Logo:** https://github.com/haris4587/MetricMatch/raw/refs/heads/main/assets/metricmatch-logo.png
+**Project:** MetricMatch  
+**One-liner:** Benchmark challenges with immutable evidence, independent GenLayer comparability consensus and matched GEN settlement.  
+**Website:** https://metricmatch-benchmarks.itzanza2.chatgpt.site  
+**GitHub:** https://github.com/haris4587/MetricMatch  
+**Contract:** https://explorer-studio.genlayer.com/address/0x58E44E52fABfbFcF83759F8eB8296B81cc517E11
 
-## Description
+**Description:** MetricMatch lets software teams publish benchmark claims and independent reviewers contest them under committed conditions. GenLayer validators authenticate exact evidence bytes and assess comparability using the original on-chain snapshot. Challenges assess and settle atomically, without an exclusive slot. Invalid, unavailable or inconclusive evidence refunds its challenger while leaving the claim open; a comparable non-refuting attempt also leaves it open. A comparable refutation awards the matched pool. Immutable receipts retain fingerprints, snapshots, decisions and credits. The app provides finalized reads, fingerprint calculation, receipt history and withdrawals. Studio uses simulated GEN and synthetic demonstration fixtures.
 
-MetricMatch lets a developer commit a software performance claim with its exact product version, metric, workload, environment, original evidence and challenge window. Another address submits public benchmark evidence and an observed value, matching the optional GEN stake. A GenLayer Intelligent Contract fetches both sources and validators decide whether the tests are genuinely comparable and substantiate the submitted numbers. Deterministic rules apply the numeric threshold and credit the matched pool to the winning party. Unavailable or ambiguous evidence remains inconclusive; retry exhaustion and resolution timeouts refund both deposits. Users inspect finalized claims, settlement and accounting in the app and withdraw their own credits.
+**Review path:** Open the public app. Confirm contract address above, claim #0 REFUTED and two attempts. Expand challenge receipts and load the history. Attempt #0 is SOURCE_UNAVAILABLE / REFUNDED with 1 GEN credit; attempt #1 is VERIFIED / COMPARABLE / REFUTED with 2 GEN credit from a distinct account. Expand original and candidate snapshots to check exact SHA-256 and byte counts. Inspect EVIDENCE.md and run the 38 adversarial contract tests.
 
-## Why GenLayer is central
+**Expected outcome:** A legitimate challenge settled the same claim after an invalid attempt. Finalized accounting shows 3 GEN deposited, zero locked, 3 GEN withdrawable. Withdrawal execution was blocked by automatic approval review, so no new transfer is claimed. Historical v0.2 transfers remain documented separately.
 
-The main decision requires understanding whether hardware, datasets, versions, workloads, units and settings support a fair comparison. Validator/LLM consensus makes that semantic judgment from independently fetched public evidence. Contract code controls permissions, one challenger, matched deposits, deadlines, retries, score direction, credit allocation and withdrawals.
-
-## Evidence links
-
-- Contract source: https://github.com/haris4587/MetricMatch/blob/main/contracts/metric_match.py
-- Live evidence and all transaction records: https://github.com/haris4587/MetricMatch/blob/main/EVIDENCE.md
-- Finalized state: https://github.com/haris4587/MetricMatch/blob/main/evidence/finalized-state.json
-- Full-consensus COMPARABLE/REFUTED evaluation: https://explorer-studio.genlayer.com/tx/0x70992a2986962f1a63dd82371d93d3aca7fa8205cd750ac0f634e060fec68bbb
-- Finalized two-GEN challenger transfer: https://explorer-studio.genlayer.com/tx/0x277d56a283795d287c80c24815ffd62e07cf1b2a84b71b631e466963df736740
-- Finalized one-GEN claimant refund: https://explorer-studio.genlayer.com/tx/0x98ff7801eb49a28233d12223ff184c9fd53131156b1aa1582767578344d51dff
-- Finalized one-GEN challenger refund: https://explorer-studio.genlayer.com/tx/0x1b4c4b4f1a3742345715ce1d900a867c89dbb6ea4880d392cc65f8f166111dcc
-- Contract tests: https://github.com/haris4587/MetricMatch/blob/main/tests/test_contract.py
-
-## Validation and limitations
-
-A NORMAL full-consensus live run refuted a synthetic 40-second claim against a comparable 48-second challenge and transferred the two-GEN pool to the challenger. A second claim tested unavailable evidence, three inconclusive retries and two one-GEN refunds. Finalized accounting shows four GEN deposited, four withdrawn and zero outstanding balance, credits or locks. Repository checks include 18 Python contract tests, frontend tests, TypeScript checking and a production build.
-
-Studionet GEN is simulated; fixtures are synthetic. This proves the workflow, not real benchmark accuracy or mainnet safety. The contract is unaudited. The v0.2 public app was published September 30, 2026 and targets the stake-enabled contract. Portal wallet sign-in and terms acceptance remain necessary; this file is a submission draft, not proof of a submitted or approved listing.
+**Evidence URL:** https://github.com/haris4587/MetricMatch/blob/main/EVIDENCE.md  
+**Steward response:** https://github.com/haris4587/MetricMatch/blob/main/STEWARD_RESPONSE.md  
+**Finalized state:** https://github.com/haris4587/MetricMatch/blob/main/evidence/v03-finalized-state.json

@@ -1,0 +1,15 @@
+import {execFileSync} from 'node:child_process';
+import {writeFileSync} from 'node:fs';
+import {createClient} from 'genlayer-js';
+import {studionet} from 'genlayer-js/chains';
+import {TransactionHashVariant} from 'genlayer-js/types';
+if(process.env.METRICMATCH_CURL_TRANSPORT==='1')globalThis.fetch=async(url,options)=>{if(String(url)!=='https://studio.genlayer.com/api')throw Error('Unexpected endpoint');return new Response(execFileSync('curl',['--max-time','30','--fail-with-body','-sS',String(url),'-H','Content-Type: application/json','--data-binary','@-'],{input:options.body,encoding:'utf8'}),{status:200,headers:{'Content-Type':'application/json'}});};
+const address='0x58E44E52fABfbFcF83759F8eB8296B81cc517E11';const c=createClient({chain:studionet});
+const read=async(fn,args=[])=>c.readContract({address,functionName:fn,args,transactionHashVariant:TransactionHashVariant.LATEST_FINAL});
+const count=Number(await read('get_count'));const attempts=Number(await read('get_attempt_count'));
+const result={address,network:'studionet',state:'LATEST_FINAL',checked_at:new Date().toISOString(),claims:[],attempts:[],accounting:JSON.parse(await read('get_accounting'))};
+for(let i=0;i<count;i++)result.claims.push(JSON.parse(await read('get_claim',[i])));
+for(let i=0;i<attempts;i++)result.attempts.push(JSON.parse(await read('get_attempt',[i])));
+if(Number(await read('get_count'))!==count||Number(await read('get_attempt_count'))!==attempts||result.claims.reduce((n,c)=>n+c.attempts,0)!==attempts)throw Error('State changed during sequential reads; retry after finalization');
+writeFileSync(process.argv[2]||'evidence/v03-finalized-state.json',JSON.stringify(result,null,2)+'\n');
+console.log(JSON.stringify({claims:result.claims.map(c=>({id:c.id,status:c.status,attempts:c.attempts})),attempts:result.attempts.map(r=>({id:r.id,outcome:r.outcome,reason:r.reason,challenger:r.challenger})),accounting:result.accounting}));

@@ -1,0 +1,34 @@
+[
+  {
+    "action": "deploy",
+    "hash": "0x0c943be60da8d5f7947c165577b9f85720d1d5449f8be12661dd9d8b559f7ef0",
+    "value_wei": "0",
+    "status": "FINALIZED",
+    "execution_mode": "NORMAL",
+    "verification_source": "Studio visible transaction status; finalized contract reads"
+  },
+  {
+    "action": "create_claim",
+    "hash": "0x0bb218fece06d91741805e93def6c7472e18b4b73a24baf17f1427ca4a3bb87b",
+    "value_wei": "1000000000000000000",
+    "status": "FINALIZED",
+    "execution_mode": "NORMAL",
+    "verification_source": "Studio visible transaction status; finalized contract reads"
+  },
+  {
+    "action": "invalid_challenge",
+    "hash": "0x37ff3d2975ef59b9a60f97c8f36de091ea10a5aaf974807c05c762ef3c71b475",
+    "value_wei": "1000000000000000000",
+    "status": "FINALIZED",
+    "execution_mode": "NORMAL",
+    "verification_source": "Studio visible transaction status; finalized contract reads"
+  },
+  {
+    "action": "legitimate_challenge",
+    "hash": "0xb31fece7b6c3a2c112534dec1be807c3be93603d89c7c7a195f53d6423dc9f09",
+    "value_wei": "1000000000000000000",
+    "status": "FINALIZED",
+    "execution_mode": "NORMAL",
+    "verification_source": "Studio visible transaction status; finalized contract reads"
+  }
+]

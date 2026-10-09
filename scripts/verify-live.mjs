@@ -1,23 +1,20 @@
-import {execFileSync} from 'node:child_process';
-import {writeFileSync} from 'node:fs';
-import {createClient} from 'genlayer-js';
-import {studionet} from 'genlayer-js/chains';
-import {TransactionHashVariant} from 'genlayer-js/types';
-// Optional curl transport for environments that route HTTPS through a proxy.
-if (process.env.METRICMATCH_CURL_TRANSPORT === '1') {
-  globalThis.fetch = async (url, options) => {
-    if (String(url) !== 'https://studio.genlayer.com/api') throw new Error('Unexpected endpoint');
-    const body = execFileSync('curl', ['--fail-with-body','-sS',String(url),'-H','Content-Type: application/json','--data-binary','@-'], {input:options.body,encoding:'utf8'});
-    return new Response(body,{status:200,headers:{'Content-Type':'application/json'}});
-  };
-}
-const address = '0x3F251a2330c21312093cf76e8AC10274b40D155D';
-const client = createClient({chain:studionet});
-const results = {network:'studionet',address,checked_at:new Date().toISOString(),state:'LATEST_FINAL',claims:[],accounting:null};
-for (const id of [0,1]) results.claims.push(JSON.parse(await client.readContract({address,functionName:'get_claim',args:[id],transactionHashVariant:TransactionHashVariant.LATEST_FINAL})));
-results.accounting=JSON.parse(await client.readContract({address,functionName:'get_accounting',args:[],transactionHashVariant:TransactionHashVariant.LATEST_FINAL}));
-if (results.claims[0].status !== 'REFUTED' || results.claims[1].status !== 'INCONCLUSIVE') throw new Error('Unexpected outcomes');
-for (const key of ['balance_wei','locked_wei','credit_wei']) if(results.accounting[key] !== '0') throw new Error(`Outstanding ${key}`);
-if(results.accounting.withdrawn_wei !== '4000000000000000000') throw new Error('Withdrawal total mismatch');
-writeFileSync('evidence/finalized-state.json',JSON.stringify(results,null,2)+'\n');
-console.log(JSON.stringify(results,null,2));
+import {readFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {strict as assert} from 'node:assert';
+const state=JSON.parse(readFileSync('evidence/v03-finalized-state.json','utf8'));
+assert.equal(state.address,'0x58E44E52fABfbFcF83759F8eB8296B81cc517E11');
+assert.equal(state.state,'LATEST_FINAL');assert.equal(state.claims[0].status,'REFUTED');
+assert.equal(state.claims[0].attempts,2);assert.equal(state.attempts.length,2);
+const [invalid,valid]=state.attempts;
+assert.equal(invalid.reason,'SOURCE_UNAVAILABLE');assert.equal(invalid.outcome,'REFUNDED');
+assert.equal(invalid.challenger_credit_wei,'1000000000000000000');
+assert.equal(valid.verdict,'COMPARABLE');assert.equal(valid.outcome,'REFUTED');assert.equal(valid.previous_attempt,invalid.id);
+assert.equal(valid.challenger_credit_wei,'2000000000000000000');assert.notEqual(valid.challenger.toLowerCase(),invalid.challenger.toLowerCase());
+const original=state.claims[0];assert.equal(createHash('sha256').update(original.evidence_snapshot).digest('hex'),original.evidence_sha256);
+assert.equal(Buffer.byteLength(original.evidence_snapshot),original.evidence_bytes);
+assert.equal(createHash('sha256').update(valid.evidence_snapshot).digest('hex'),valid.evidence_sha256);
+assert.equal(Buffer.byteLength(valid.evidence_snapshot),valid.evidence_bytes);
+for(const r of state.attempts)assert.equal(r.claim_commitment,original.commitment);
+const a=state.accounting;assert.equal(BigInt(a.deposited_wei),BigInt(a.locked_wei)+BigInt(a.credit_wei)+BigInt(a.withdrawn_wei));
+assert.equal(a.locked_wei,'0');assert.equal(a.credit_wei,'3000000000000000000');assert.equal(a.withdrawn_wei,'0');
+console.log('Verified finalized invalid-then-legitimate challenge, evidence fingerprints and 3 GEN settlement credits. Withdrawal was blocked by automatic approval review; no v0.3 payout transfer is claimed.');
